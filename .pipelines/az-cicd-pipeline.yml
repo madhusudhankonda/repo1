@@ -1,0 +1,18 @@
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Platform/AZP.azure-pipeline-templates
+      ref: refs/heads/main
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    exclude: # skip build for given list of files
+      - /*.md
+      - .pipelines
+extends:
+  template: pipelines/gradle-pipeline.yml@templates
+  parameters:
+    jdkVersion: 11
